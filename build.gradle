@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'fr.lbarthon.computorv1.ComputorV1'
+    }
+}
+
+jar.setArchiveName("computor.jar")
