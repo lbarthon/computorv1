@@ -29,7 +29,7 @@ public class Equation {
 
     public int getDegree() {
         // Default entry returned if one of the list is empty
-        Entry defaultEntry = new Entry(-1, 0);
+        Entry defaultEntry = new Entry(0, 0);
 
         Entry leftMax = leftPart.getEntries().stream()
                 .max(Comparator.comparingInt(Entry::getPower))
@@ -50,6 +50,9 @@ public class Equation {
             Entry leftEntry = this.leftPart.getEntryByPower(rightEntry.getPower());
             if (leftEntry != null) {
                 leftEntry.setNbr(leftEntry.getNbr() - rightEntry.getNbr());
+                if (leftEntry.getNbr() == 0) {
+                    this.leftPart.removeEntry(leftEntry);
+                }
             } else {
                 this.leftPart.addEntry(rightEntry.getPower(), -rightEntry.getNbr());
             }
@@ -77,11 +80,16 @@ public class Equation {
         }
 
         public void addEntry(int power, double nbr) {
-            this.addEntry(new Entry(power, nbr));
+            Entry foundEntry = this.getEntryByPower(power);
+            if (foundEntry != null) {
+                foundEntry.setNbr(foundEntry.getNbr() + nbr);
+            } else {
+                this.addEntry(new Entry(power, nbr));
+            }
         }
 
         public Entry getEntryByPower(int power) {
-            return this.entries.stream().filter(e -> e.getPower() == power).findFirst().get();
+            return this.entries.stream().filter(e -> e.getPower() == power).findFirst().orElse(null);
         }
 
         public String toString() {
@@ -90,8 +98,20 @@ public class Equation {
             this.entries.sort(Comparator.comparingInt(Entry::getPower));
             this.entries.forEach(entry -> {
                 // If it isn't empty, adds a space
-                if (builder.length() > 0) builder.append(' ');
-                builder.append(entry.getNbr());
+                if (builder.length() > 0) {
+                    builder.append(' ');
+                }
+
+                if (entry.getNbr() < 0) {
+                    builder.append("- ");
+                    builder.append(-entry.getNbr());
+                } else {
+                    if (builder.length() > 0) {
+                        builder.append("+ ");
+                    }
+                    builder.append(entry.getNbr());
+                }
+
                 builder.append(" * X^");
                 builder.append(entry.getPower());
             });

@@ -1,18 +1,26 @@
 package fr.lbarthon.computorv1;
 
-import javax.naming.SizeLimitExceededException;
+import fr.lbarthon.computorv1.exceptions.DegreeLimitExceededException;
+
 import java.util.List;
 
 public class Solver {
     private Solver() {}
 
-    public static void solve(Equation equation) throws SizeLimitExceededException {
+    public static void solve(Equation equation) throws
+            DegreeLimitExceededException
+    {
         if (!equation.isReduced()) {
             equation.reduce();
         }
 
-        if (equation.getDegree() > 2) {
-            throw new SizeLimitExceededException();
+        System.out.println("Reduced form: " + equation.toString());
+
+        int degree = equation.getDegree();
+        System.out.println("Polynomial degree: " + degree);
+
+        if (degree > 2) {
+            throw new DegreeLimitExceededException(degree);
         }
 
         List<Equation.Entry> entries = equation.getLeftPart().getEntries();
@@ -27,6 +35,14 @@ public class Solver {
                 .map(Equation.Entry::getNbr).findFirst()
                 .orElse(0D);
 
+        if (a == 0 && b == 0) {
+            if (c == 0) {
+                System.out.println("All reals are solutions.");
+            } else {
+                System.out.println("There's no solution to this equation.");
+            }
+            return;
+        }
 
         double delta = b * b - 4 * a * c;
         double deltaSqrt = Utils.sqrt(delta);
