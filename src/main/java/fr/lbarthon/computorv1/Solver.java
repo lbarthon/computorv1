@@ -16,7 +16,7 @@ public class Solver {
 
         System.out.println("Reduced form: " + equation.toString());
 
-        int degree = equation.getDegree();
+        long degree = equation.getDegree();
         System.out.println("Polynomial degree: " + degree);
 
         if (degree > 2) {
@@ -48,15 +48,16 @@ public class Solver {
         double deltaSqrt = Utils.sqrt(delta);
 
         if (delta > 0) {
-            if (deltaSqrt - b == 0) {
-                // 1 solution
-            } else {
-                // 2 solutions
-            }
+            System.out.println("Discriminant is strictly positive, the two solutions are:");
+            System.out.println((-b - deltaSqrt) / (2 * a));
+            System.out.println((-b + deltaSqrt) / (2 * a));
         } else if (delta == 0) {
-            // 1 solution
+            System.out.println("Discriminant is zero, the solution is:");
+            System.out.println(-b / (2 * a));
         } else {
-            // Imaginary double solutions
+            System.out.println("Discriminant is negative, imaginary solutions are:");
+            System.out.println((-b / (2 * a)) + " + i√" + delta + "/" + 2 * a);
+            System.out.println((-b / (2 * a)) + " - i√" + delta + "/" + 2 * a);
         }
     }
 }

@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DegreeLimitExceededException extends Exception {
-    int degree;
+    long degree;
 }

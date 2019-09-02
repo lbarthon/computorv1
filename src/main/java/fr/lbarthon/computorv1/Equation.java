@@ -27,15 +27,15 @@ public class Equation {
         this.isReduced = false;
     }
 
-    public int getDegree() {
+    public long getDegree() {
         // Default entry returned if one of the list is empty
         Entry defaultEntry = new Entry(0, 0);
 
         Entry leftMax = leftPart.getEntries().stream()
-                .max(Comparator.comparingInt(Entry::getPower))
+                .max(Comparator.comparingLong(Entry::getPower))
                 .orElse(defaultEntry);
         Entry rightMax = rightPart.getEntries().stream()
-                .max(Comparator.comparingInt(Entry::getPower))
+                .max(Comparator.comparingLong(Entry::getPower))
                 .orElse(defaultEntry);
 
         return Math.max(leftMax.getPower(), rightMax.getPower());
@@ -79,7 +79,7 @@ public class Equation {
             this.entries.remove(e);
         }
 
-        public void addEntry(int power, double nbr) {
+        public void addEntry(long power, double nbr) {
             Entry foundEntry = this.getEntryByPower(power);
             if (foundEntry != null) {
                 foundEntry.setNbr(foundEntry.getNbr() + nbr);
@@ -88,14 +88,14 @@ public class Equation {
             }
         }
 
-        public Entry getEntryByPower(int power) {
+        public Entry getEntryByPower(long power) {
             return this.entries.stream().filter(e -> e.getPower() == power).findFirst().orElse(null);
         }
 
         public String toString() {
             StringBuilder builder = new StringBuilder();
 
-            this.entries.sort(Comparator.comparingInt(Entry::getPower));
+            this.entries.sort(Comparator.comparingLong(Entry::getPower));
             this.entries.forEach(entry -> {
                 // If it isn't empty, adds a space
                 if (builder.length() > 0) {
@@ -128,7 +128,7 @@ public class Equation {
     @Data
     @AllArgsConstructor
     public class Entry {
-        private int power;
+        private long power;
         private double nbr;
     }
 }

@@ -4,7 +4,7 @@ public class Utils {
     private Utils() {}
 
     public static double sqrt(double x) {
-        if (x == 0) return 0;
+        if (x <= 0) return 0;
         double last = 0.0;
         double res = 1.0;
         while (res != last) {

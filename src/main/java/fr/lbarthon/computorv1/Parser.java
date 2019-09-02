@@ -107,12 +107,16 @@ public class Parser {
             }
 
             if (!Character.isDigit(chars[++i])) {
-                throw new ParserException(str, i);
+                if (chars[i] == '-') {
+                    throw new InvalidPowerException(- atoi(Arrays.copyOfRange(chars, i + 1, chars.length)));
+                } else {
+                    throw new ParserException(str, i);
+                }
             }
 
             power = atoi(Arrays.copyOfRange(chars, i, chars.length));
 
-            if (power % 1 != 0 || power < 0) {
+            if (power % 1 != 0 || power < 0 || power > Long.MAX_VALUE) {
                 throw new InvalidPowerException(power);
             }
 
@@ -120,7 +124,7 @@ public class Parser {
             do i++;
             while (i < chars.length && Character.isDigit(chars[i]));
 
-            part.addEntry((int) power, isNegative ? -nbr : nbr);
+            part.addEntry((long) power, isNegative ? -nbr : nbr);
         }
     }
     /**
