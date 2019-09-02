@@ -14,14 +14,17 @@ public class ParserException extends Exception {
     final int offset;
 
     public void displayProblematicPart() {
-        int start = offset - 5 > 0 ? offset - 5 : 0;
+        int start = this.offset - 5;
+        if (start < 0) {
+            start = 0;
+        }
         int end = start + wantedChars;
         if (end > this.parsedString.length()) {
             end = this.parsedString.length();
         }
         System.out.println("Error parsing the input !");
         System.out.println(this.parsedString.substring(start, end));
-        System.out.println(getSpaces(offset - start) + '^');
+        System.out.println(getSpaces(this.offset - start) + '^');
     }
 
     private String getSpaces(int nbr) {

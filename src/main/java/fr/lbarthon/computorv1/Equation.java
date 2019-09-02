@@ -53,7 +53,7 @@ public class Equation {
                 if (leftEntry.getNbr() == 0) {
                     this.leftPart.removeEntry(leftEntry);
                 }
-            } else {
+            } else if (rightEntry.getNbr() != 0) {
                 this.leftPart.addEntry(rightEntry.getPower(), -rightEntry.getNbr());
             }
         });
@@ -130,5 +130,9 @@ public class Equation {
     public class Entry {
         private long power;
         private double nbr;
+
+        public double getNbr() {
+            return nbr == -0 ? -nbr : nbr;
+        }
     }
 }

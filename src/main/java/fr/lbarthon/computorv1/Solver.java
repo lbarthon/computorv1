@@ -35,13 +35,20 @@ public class Solver {
                 .map(Equation.Entry::getNbr).findFirst()
                 .orElse(0D);
 
-        if (a == 0 && b == 0) {
-            if (c == 0) {
-                System.out.println("All reals are solutions.");
-            } else {
-                System.out.println("There's no solution to this equation.");
+        if (a == 0) {
+            if (b == 0) {
+                if (c == 0) {
+                    System.out.println("All reals are solutions.");
+                } else {
+                    System.out.println("There's no solution to this equation.");
+                }
+                return;
             }
-            return;
+            if (c == 0) {
+                System.out.println("The solution is:");
+                System.out.println(0D);
+                return;
+            }
         }
 
         double delta = b * b - 4 * a * c;
@@ -49,11 +56,11 @@ public class Solver {
 
         if (delta > 0) {
             System.out.println("Discriminant is strictly positive, the two solutions are:");
-            System.out.println((-b - deltaSqrt) / (2 * a));
-            System.out.println((-b + deltaSqrt) / (2 * a));
+            System.out.println((-b - deltaSqrt) / (2 * a) + 0.0);
+            System.out.println((-b + deltaSqrt) / (2 * a) + 0.0);
         } else if (delta == 0) {
             System.out.println("Discriminant is zero, the solution is:");
-            System.out.println(-b / (2 * a));
+            System.out.println((-b / (2 * a)) + 0.0);
         } else {
             System.out.println("Discriminant is negative, imaginary solutions are:");
             System.out.println((-b / (2 * a)) + " + i√" + delta + "/" + 2 * a);

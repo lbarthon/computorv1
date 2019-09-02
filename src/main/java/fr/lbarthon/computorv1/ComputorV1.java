@@ -8,7 +8,8 @@ public class ComputorV1 {
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            return; // Handle wrong input
+            System.out.println("Usage: java -jar computor <equation>");
+            return;
         }
 
         try {
@@ -16,7 +17,6 @@ public class ComputorV1 {
             Solver.solve(equation);
         } catch (ParserException e) {
             e.displayProblematicPart();
-            e.printStackTrace();
         } catch (DegreeLimitExceededException e) {
             System.out.println("The polynomial degree is strictly greater than 2, I can't solve.");
         } catch (InvalidPowerException e) {
