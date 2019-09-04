@@ -49,6 +49,10 @@ public class Solver {
                 System.out.println(0D);
                 return;
             }
+
+            System.out.println("The solution is:");
+            System.out.println(c / b);
+            return;
         }
 
         double delta = b * b - 4 * a * c;

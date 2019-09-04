@@ -162,7 +162,7 @@ public class Parser {
     }
 
     private static double power(double nbr, int power) {
-        if (power == 0) return 1;
+        if (power <= 0) return 1;
         return nbr * power(nbr, power - 1);
     }
 }
