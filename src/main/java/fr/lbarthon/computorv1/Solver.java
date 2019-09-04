@@ -35,7 +35,9 @@ public class Solver {
                 .map(Equation.Entry::getNbr).findFirst()
                 .orElse(0D);
 
+        // If the degree is 1
         if (a == 0) {
+            // If the degree is 0
             if (b == 0) {
                 if (c == 0) {
                     System.out.println("All reals are solutions.");
@@ -46,13 +48,7 @@ public class Solver {
             }
 
             System.out.println("The solution is:");
-
-            if (c == 0) {
-                System.out.println(0D);
-            } else {
-                System.out.println(c / b);
-            }
-
+            System.out.println(c / b);
             return;
         }
 
