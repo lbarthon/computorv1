@@ -44,14 +44,15 @@ public class Solver {
                 }
                 return;
             }
-            if (c == 0) {
-                System.out.println("The solution is:");
-                System.out.println(0D);
-                return;
-            }
 
             System.out.println("The solution is:");
-            System.out.println(c / b);
+
+            if (c == 0) {
+                System.out.println(0D);
+            } else {
+                System.out.println(c / b);
+            }
+
             return;
         }
 
