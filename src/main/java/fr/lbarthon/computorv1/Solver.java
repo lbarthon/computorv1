@@ -48,7 +48,7 @@ public class Solver {
             }
 
             System.out.println("The solution is:");
-            System.out.println(c / b);
+            System.out.println(-c / b);
             return;
         }
 
@@ -64,8 +64,8 @@ public class Solver {
             System.out.println((-b / (2 * a)) + 0.0);
         } else {
             System.out.println("Discriminant is negative, imaginary solutions are:");
-            System.out.println((-b / (2 * a)) + " + i√" + delta + "/" + 2 * a);
-            System.out.println((-b / (2 * a)) + " - i√" + delta + "/" + 2 * a);
+            System.out.println((-b / (2 * a)) + " + i√" + (-delta) + "/" + 2 * a);
+            System.out.println((-b / (2 * a)) + " - i√" + (-delta) + "/" + 2 * a);
         }
     }
 }
