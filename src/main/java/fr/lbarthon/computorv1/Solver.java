@@ -7,17 +7,18 @@ import java.util.List;
 public class Solver {
     private Solver() {}
 
-    public static void solve(Equation equation) throws
+    public static String solve(Equation equation) throws
             DegreeLimitExceededException
     {
+        StringBuilder ret = new StringBuilder();
         if (!equation.isReduced()) {
             equation.reduce();
         }
 
-        System.out.println("Reduced form: " + equation.toString());
+        ret.append("Reduced form: ").append(equation.toString()).append('\n');
 
         long degree = equation.getDegree();
-        System.out.println("Polynomial degree: " + degree);
+        ret.append("Polynomial degree: ").append(degree).append('\n');
 
         if (degree > 2) {
             throw new DegreeLimitExceededException(degree);
@@ -40,32 +41,34 @@ public class Solver {
             // If the degree is 0
             if (b == 0) {
                 if (c == 0) {
-                    System.out.println("All reals are solutions.");
+                    ret.append("All reals are solutions.").append('\n');
                 } else {
-                    System.out.println("There's no solution to this equation.");
+                    ret.append("There's no solution to this equation.").append('\n');
                 }
-                return;
+                return ret.toString();
             }
 
-            System.out.println("The solution is:");
-            System.out.println(-c / b);
-            return;
+            ret.append("The solution is:").append('\n')
+                    .append(-c / b).append('\n');
+            return ret.toString();
         }
 
         double delta = b * b - 4 * a * c;
         double deltaSqrt = Utils.sqrt(delta);
 
         if (delta > 0) {
-            System.out.println("Discriminant is strictly positive, the two solutions are:");
-            System.out.println((-b - deltaSqrt) / (2 * a) + 0.0);
-            System.out.println((-b + deltaSqrt) / (2 * a) + 0.0);
+            ret.append("Discriminant is strictly positive, the two solutions are:").append('\n')
+                    .append((-b - deltaSqrt) / (2 * a) + 0.0).append('\n')
+                    .append((-b + deltaSqrt) / (2 * a) + 0.0).append('\n');
         } else if (delta == 0) {
-            System.out.println("Discriminant is zero, the solution is:");
-            System.out.println((-b / (2 * a)) + 0.0);
+            ret.append("Discriminant is zero, the solution is:").append('\n')
+                    .append((-b / (2 * a)) + 0.0).append('\n');
         } else {
-            System.out.println("Discriminant is negative, imaginary solutions are:");
-            System.out.println((-b / (2 * a)) + " + i√" + (-delta) + "/" + 2 * a);
-            System.out.println((-b / (2 * a)) + " - i√" + (-delta) + "/" + 2 * a);
+            ret.append("Discriminant is negative, imaginary solutions are:").append('\n')
+                    .append(-b / (2 * a)).append(" + i√").append(-delta).append("/").append(2 * a).append('\n')
+                    .append(-b / (2 * a)).append(" - i√").append(-delta).append("/").append(2 * a).append('\n');
         }
+
+        return ret.toString();
     }
 }
